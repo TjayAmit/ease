@@ -1,5 +1,5 @@
 import { Link, usePage } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid, Menu, Search, Users } from 'lucide-react';
+import { BookOpen, Folder, LayoutGrid, Menu, PenBox, Search, Users, Users2 } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import AppLogoIcon from '@/components/app-logo-icon';
 import { Breadcrumbs } from '@/components/breadcrumbs';
@@ -48,7 +48,12 @@ const mainNavItems: NavItem[] = [
     {
         title: 'Users',
         href: '/users',
-        icon: Users,
+        icon: Users2,
+    },
+    {
+        title: 'Roles',
+        href: '/roles',
+        icon: PenBox,
     }
 ];
 

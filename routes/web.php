@@ -29,6 +29,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
             'users' => User::all(),
         ]);
     })->name('users.index');
+
+    Route::get('roles', function () {
+        return inertia('roles/index');
+    })->name('roles.index');
 });
 
 Route::middleware(['guest'])->group(function () {
