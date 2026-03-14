@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
+use App\Models\User;
 
 use App\Http\Controllers\Auth\SocialiteController;
 
@@ -9,7 +10,6 @@ Route::inertia('/', 'welcome', [
     'canRegister' => Features::enabled(Features::registration()),
 ])->name('home');
 
-use App\Models\User;
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {
@@ -17,12 +17,18 @@ Route::middleware(['auth', 'verified'])->group(function () {
             'stats' => [
                 'total_users' => User::count(),
                 'new_users_today' => User::whereDate('created_at', today())->count(),
-                'peak_requests' => '1,204', // Mocked stat for now
-                'active_sessions' => random_int(10, 50), // Mocked dynamic stat
+                'peak_requests' => '1,204',
+                'active_sessions' => random_int(10, 50)
             ],
             'recent_users' => User::latest()->take(5)->get(['id', 'name', 'email', 'created_at']),
         ]);
     })->name('dashboard');
+
+    Route::get('users', function () {
+        return inertia('users/index', [
+            'users' => User::all(),
+        ]);
+    })->name('users.index');
 });
 
 Route::middleware(['guest'])->group(function () {
