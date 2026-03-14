@@ -9,8 +9,20 @@ Route::inertia('/', 'welcome', [
     'canRegister' => Features::enabled(Features::registration()),
 ])->name('home');
 
+use App\Models\User;
+
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::inertia('dashboard', 'dashboard')->name('dashboard');
+    Route::get('dashboard', function () {
+        return inertia('dashboard', [
+            'stats' => [
+                'total_users' => User::count(),
+                'new_users_today' => User::whereDate('created_at', today())->count(),
+                'peak_requests' => '1,204', // Mocked stat for now
+                'active_sessions' => random_int(10, 50), // Mocked dynamic stat
+            ],
+            'recent_users' => User::latest()->take(5)->get(['id', 'name', 'email', 'created_at']),
+        ]);
+    })->name('dashboard');
 });
 
 Route::middleware(['guest'])->group(function () {
