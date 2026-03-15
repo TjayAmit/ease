@@ -2,14 +2,14 @@ import { Area, Bar, Line } from "recharts";
 import { CHARTTYPE } from "@/constant/chart-constant";
 
 interface ChartProps {
-    chart?: typeof CHARTTYPE[keyof typeof CHARTTYPE]; // "area" | "line" | "bar"
+    chart?: typeof CHARTTYPE[keyof typeof CHARTTYPE];
     ykey: string;
     color: string;
     gradientId?: string;
 }
 
 export default function Chart({
-    chart = CHARTTYPE.AREA, // default to area
+    chart = CHARTTYPE.AREA,
     ykey,
     color,
     gradientId,

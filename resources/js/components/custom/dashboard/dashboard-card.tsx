@@ -24,7 +24,7 @@ export default function DashboardCard({ title, value, change, icon, chartData = 
     const gradientId = `stat-gradient-${title.replace(/\s+/g, "-").toLowerCase()}`;
 
     return (
-        <Card className="relative h-32 gap-1 bg-[#18181b] overflow-hidden">
+        <Card className="relative h-32 gap-1 dark:bg-[#18181b] overflow-hidden">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 z-10">
                 <CardTitle className="text-sm font-medium">{title}</CardTitle>
                 {icon}

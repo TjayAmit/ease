@@ -23,7 +23,7 @@ export default function DashboardChart({
     const gradientId = `stat-gradient-${color.replace("#", "")}`;
 
     return (
-        <Card className="relative h-full gap-1 bg-[#18181b] overflow-hidden">
+        <Card className="relative h-full gap-1 dark:bg-[#18181b] overflow-hidden">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 z-10 mb-4">
                 <CardTitle>{title}</CardTitle>
             </CardHeader>
