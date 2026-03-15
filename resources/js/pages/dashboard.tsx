@@ -4,7 +4,7 @@ import AppLayout from '@/layouts/app-layout';
 import { dashboard } from '@/routes';
 import type { BreadcrumbItem } from '@/types';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { DashboardCard } from '@/components/custom/dashboard';
+import { DashboardCard, DashboardChart } from '@/components/custom/dashboard';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -30,9 +30,10 @@ type Stats = {
 interface DashboardProps {
     stats: Stats;
     recent_users: User[];
+    chart_data: Array<Record<string, any>>;
 }
 
-export default function Dashboard({ stats, recent_users }: DashboardProps) {
+export default function Dashboard({ stats, recent_users, chart_data }: DashboardProps) {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Dashboard" />
@@ -70,21 +71,18 @@ export default function Dashboard({ stats, recent_users }: DashboardProps) {
                     />
                 </div>
 
-                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-7">
-                    <Card className="col-span-4 lg:col-span-4">
-                        <CardHeader>
-                            <CardTitle>System Overview</CardTitle>
-                        </CardHeader>
-                        <CardContent className="pl-2">
-                            <div className="h-[300px] w-full bg-sidebar rounded-xl border border-sidebar-border/50 flex items-center justify-center p-6 text-muted-foreground">
-                                <span className="flex items-center gap-2">
-                                    <Activity className="h-5 w-5" /> Analytics Chart Visualization
-                                </span>
-                            </div>
-                        </CardContent>
-                    </Card>
+                <div className="h-[650px] grid grid-cols-3 gap-6 md:grid-cols-2 lg:grid-cols-4 lg:h-[350px]">
+                    <div className='col-span-4 sm:col-span-4 md:col-span-2 lg:col-span-2'>
+                        <DashboardChart
+                            title="Monthly Sales"
+                            chartData={chart_data}
+                            xKey="month"
+                            yKey="sales"
+                            color="#22c55e"
+                        />
+                    </div>
 
-                    <Card className="col-span-3">
+                    <Card className='col-span-4 sm:col-span-4 md:col-span-2 lg:col-span-2'>
                         <CardHeader>
                             <CardTitle>Recent Users</CardTitle>
                         </CardHeader>
