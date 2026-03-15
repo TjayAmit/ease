@@ -1,7 +1,8 @@
 import { AreaChart, LineChart, CartesianGrid, XAxis, YAxis, Legend } from "recharts";
+import { CHARTTYPE } from "@/constant/chart-constants";
 
 interface ChartWrapperProps {
-    chart?: "area" | "line";
+    chart?: typeof CHARTTYPE[keyof typeof CHARTTYPE];
     chartData: Array<Record<string, any>>;
     xKey: string;
     gradientId: string;
@@ -10,7 +11,7 @@ interface ChartWrapperProps {
 }
 
 export default function ChartWrapper({
-    chart = "area",
+    chart,
     chartData,
     xKey,
     gradientId,

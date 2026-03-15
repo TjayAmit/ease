@@ -1,13 +1,14 @@
 import { Area, Line } from "recharts";
+import { CHARTTYPE } from "@/constant/chart-constants";
 
 interface ChartProps {
-    chart?: "area" | "line";
+    chart?: typeof CHARTTYPE[keyof typeof CHARTTYPE];
     ykey: string;
     color: string;
     gradientId?: string;
 }
 
-export default function Chart({ chart = "area", ykey, color, gradientId }: ChartProps) {
+export default function Chart({ chart, ykey, color, gradientId }: ChartProps) {
     const commonProps = {
         type: "monotone" as const,
         dataKey: ykey,

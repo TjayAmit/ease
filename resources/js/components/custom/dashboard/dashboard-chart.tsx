@@ -1,8 +1,10 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ResponsiveContainer } from "recharts";
 import { Chart, ChartWrapper } from "./ui";
+import { CHARTTYPE } from "@/constant/chart-constants";
 
 interface DashboardChartProps {
+    chart?: typeof CHARTTYPE[keyof typeof CHARTTYPE];
     chartData: Array<Record<string, any>>;
     xKey: string;
     yKey: string;
@@ -11,6 +13,7 @@ interface DashboardChartProps {
 }
 
 export default function DashboardChart({
+    chart = CHARTTYPE.AREA,
     chartData,
     xKey,
     yKey,
@@ -27,8 +30,8 @@ export default function DashboardChart({
 
             <CardContent className="h-full pl-2">
                 <ResponsiveContainer width="100%" height="100%">
-                    <ChartWrapper chart='line' chartData={chartData} xKey={xKey} gradientId={gradientId} color={color}>
-                        <Chart chart='line' ykey={yKey} color={color} gradientId={gradientId} />
+                    <ChartWrapper chart={chart} chartData={chartData} xKey={xKey} gradientId={gradientId} color={color}>
+                        <Chart chart={chart} ykey={yKey} color={color} gradientId={gradientId} />
                     </ChartWrapper>
                 </ResponsiveContainer>
             </CardContent>

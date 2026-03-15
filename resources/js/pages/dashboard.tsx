@@ -5,6 +5,7 @@ import { dashboard } from '@/routes';
 import type { BreadcrumbItem } from '@/types';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { DashboardCard, DashboardChart } from '@/components/custom/dashboard';
+import { CHARTTYPE } from '@/constant/chart-constants';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -75,6 +76,7 @@ export default function Dashboard({ stats, recent_users, chart_data }: Dashboard
                     <div className='col-span-4 sm:col-span-4 md:col-span-2 lg:col-span-2'>
                         <DashboardChart
                             title="Monthly Sales"
+                            chart={CHARTTYPE.AREA}
                             chartData={chart_data}
                             xKey="month"
                             yKey="sales"
