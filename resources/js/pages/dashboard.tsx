@@ -4,6 +4,7 @@ import AppLayout from '@/layouts/app-layout';
 import { dashboard } from '@/routes';
 import type { BreadcrumbItem } from '@/types';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { DashboardCard } from '@/components/custom/dashboard';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -37,46 +38,36 @@ export default function Dashboard({ stats, recent_users }: DashboardProps) {
             <Head title="Dashboard" />
             <div className="flex flex-1 flex-col gap-6 p-6">
                 <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                    <Card>
-                        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                            <CardTitle className="text-sm font-medium">Total Users</CardTitle>
-                            <Users className="h-4 w-4 text-muted-foreground" />
-                        </CardHeader>
-                        <CardContent>
-                            <div className="text-2xl font-bold">{stats.total_users.toLocaleString()}</div>
-                            <p className="text-xs text-muted-foreground">+20.1% from last month</p>
-                        </CardContent>
-                    </Card>
-                    <Card>
-                        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                            <CardTitle className="text-sm font-medium">New Users Today</CardTitle>
-                            <UserPlus className="h-4 w-4 text-muted-foreground" />
-                        </CardHeader>
-                        <CardContent>
-                            <div className="text-2xl font-bold">{stats.new_users_today.toLocaleString()}</div>
-                            <p className="text-xs text-muted-foreground">+12% from yesterday</p>
-                        </CardContent>
-                    </Card>
-                    <Card>
-                        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                            <CardTitle className="text-sm font-medium">Peak Requests</CardTitle>
-                            <Zap className="h-4 w-4 text-muted-foreground" />
-                        </CardHeader>
-                        <CardContent>
-                            <div className="text-2xl font-bold">{stats.peak_requests}</div>
-                            <p className="text-xs text-muted-foreground">Requests/min</p>
-                        </CardContent>
-                    </Card>
-                    <Card>
-                        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                            <CardTitle className="text-sm font-medium">Active Sessions</CardTitle>
-                            <Activity className="h-4 w-4 text-muted-foreground" />
-                        </CardHeader>
-                        <CardContent>
-                            <div className="text-2xl font-bold">+{stats.active_sessions}</div>
-                            <p className="text-xs text-muted-foreground">Currently online</p>
-                        </CardContent>
-                    </Card>
+                    <DashboardCard
+                        title="Total Users"
+                        value={stats.total_users.toLocaleString()}
+                        change="+20.1% from last month"
+                        icon={<Users className="w-4 text-muted-foreground" />}
+                    />
+
+                    <DashboardCard
+                        title="New Users Today"
+                        value={stats.new_users_today.toLocaleString()}
+                        change="+20.1% from last month"
+                        icon={<UserPlus className="w-4 text-muted-foreground" />}
+                        color='gray'
+                    />
+
+                    <DashboardCard
+                        title="Peak Requests"
+                        value={stats.peak_requests}
+                        change="Requests/min"
+                        icon={<Zap className="w-4 text-muted-foreground text-amber-900" />}
+                        color='orange'
+                    />
+
+                    <DashboardCard
+                        title="Active Sessions"
+                        value={stats.active_sessions.toLocaleString()}
+                        change="Currently online"
+                        icon={<Activity className="w-4 text-muted-foreground" />}
+                        color='teal'
+                    />
                 </div>
 
                 <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-7">
