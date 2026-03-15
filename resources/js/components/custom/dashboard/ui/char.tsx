@@ -1,14 +1,19 @@
-import { Area, Line } from "recharts";
-import { CHARTTYPE } from "@/constant/chart-constants";
+import { Area, Bar, Line } from "recharts";
+import { CHARTTYPE } from "@/constant/chart-constant";
 
 interface ChartProps {
-    chart?: typeof CHARTTYPE[keyof typeof CHARTTYPE];
+    chart?: typeof CHARTTYPE[keyof typeof CHARTTYPE]; // "area" | "line" | "bar"
     ykey: string;
     color: string;
     gradientId?: string;
 }
 
-export default function Chart({ chart, ykey, color, gradientId }: ChartProps) {
+export default function Chart({
+    chart = CHARTTYPE.AREA, // default to area
+    ykey,
+    color,
+    gradientId,
+}: ChartProps) {
     const commonProps = {
         type: "monotone" as const,
         dataKey: ykey,
@@ -18,9 +23,13 @@ export default function Chart({ chart, ykey, color, gradientId }: ChartProps) {
         activeDot: { stroke: "var(--color-surface-base)" },
     };
 
-    if (chart === "line") {
-        return <Line {...commonProps} />;
+    switch (chart) {
+        case CHARTTYPE.LINE:
+            return <Line {...commonProps} />;
+        case CHARTTYPE.BAR:
+            return <Bar {...commonProps} fill={color} />;
+        case CHARTTYPE.AREA:
+        default:
+            return <Area {...commonProps} fill={gradientId ? `url(#${gradientId})` : color} />;
     }
-
-    return <Area {...commonProps} fill={gradientId ? `url(#${gradientId})` : color} />;
 }

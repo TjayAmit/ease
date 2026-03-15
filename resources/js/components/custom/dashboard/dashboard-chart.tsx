@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ResponsiveContainer } from "recharts";
 import { Chart, ChartWrapper } from "./ui";
-import { CHARTTYPE } from "@/constant/chart-constants";
+import { CHARTTYPE } from "@/constant/chart-constant";
 
 interface DashboardChartProps {
     chart?: typeof CHARTTYPE[keyof typeof CHARTTYPE];

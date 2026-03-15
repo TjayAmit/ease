@@ -1,5 +1,6 @@
 export const CHARTTYPE = {
     AREA: 'area',
-    LINE: 'line'
+    LINE: 'line',
+    BAR: 'bar'
 } as const;
 

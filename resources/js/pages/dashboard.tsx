@@ -5,7 +5,7 @@ import { dashboard } from '@/routes';
 import type { BreadcrumbItem } from '@/types';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { DashboardCard, DashboardChart } from '@/components/custom/dashboard';
-import { CHARTTYPE } from '@/constant/chart-constants';
+import { CHARTTYPE } from '@/constant/chart-constant';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
